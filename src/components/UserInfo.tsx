@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 import Link from "next/link";
 
 const UserInfo = () => {
@@ -19,29 +20,31 @@ const UserInfo = () => {
           <Link href="/profile" className="shrink-0">
             <div className="avatar cursor-pointer">
               <div className="w-10 rounded-full ring-2 ring-red-600 ring-offset-2 ring-offset-white">
-                <img
-                  src={user?.image as string}
+                <Image
+                  src={user.image as string}
                   alt="User Avatar"
-                  className="h-full w-full object-cover"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover"
                 />
               </div>
             </div>
           </Link>
 
-          {/* User Info */}
-          <div className="min-w-0 leading-tight">
-            <h2 className="max-w-32 truncate text-sm font-semibold text-gray-900">
-              {user?.name}
+          {/* User Name */}
+          <div className="min-w-0">
+            <h2 className="whitespace-nowrap text-sm font-semibold text-gray-900">
+              {user.name}
             </h2>
           </div>
 
           {/* Divider */}
-          <div className="h-7 w-px bg-gray-200" />
+          <div className="h-7 w-px shrink-0 bg-gray-200" />
 
           {/* Sign Out */}
           <button
             onClick={handleSignout}
-            className="rounded-lg border border-red-100 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-200 hover:bg-red-600 hover:text-white"
+            className="shrink-0 rounded-lg border border-red-100 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-200 hover:bg-red-600 hover:text-white"
           >
             Sign out
           </button>
@@ -57,7 +60,7 @@ const UserInfo = () => {
 
           <Link
             href="/signup"
-            className="rounded-md bg-green-600 px-3 py-1.5 text-[13px] font-semibold text-white shadow-sm hover:bg-green-700 sm:px-4 sm:py-2 sm:text-[14px] md:text-[16px]"
+            className="rounded-md bg-green-600 px-3 py-1.5 text-[13px] font-semibold text-white shadow-sm hover:bg-green-700 sm:px-4 sm:py-2 sm:text-[14px] md:px-4 md:py-2 md:text-[16px]"
           >
             সাইন আপ
           </Link>
