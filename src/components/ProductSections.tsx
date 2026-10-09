@@ -75,7 +75,7 @@ const ProductSections = async () => {
   const ProductCard = ({ product }: { product: Product }) => {
     return (
       <Link
-        href={`/product/${product.slug}`}
+        href={`/product/${product.id}`}
         className="group block rounded-xl border border-gray-200 bg-white p-3 transition-all duration-200 hover:border-green-200 hover:shadow-sm"
       >
         <div className="flex items-center gap-3">
@@ -121,7 +121,7 @@ const ProductSections = async () => {
   };
 
   return (
-    <main className="mx-auto w-full max-w-[1100px] px-3 py-8 sm:px-4">
+    <main className=" container mx-auto w-full max-w-6xl px-3 py-8 sm:px-4">
       <section>
         <div className="mb-4">
           <h2 className="text-[20px] font-bold text-gray-900 sm:text-[22px]">

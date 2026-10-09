@@ -19,13 +19,11 @@ interface Product {
   };
 }
 
-interface CategoryProductsProps {
-  products: Product[];
-}
-
 const CategoryProducts = ({
   products,
-}: CategoryProductsProps) => {
+}: {
+  products: Product[];
+}) => {
   const [sort, setSort] = useState("default");
 
   const sortedProducts = [...products].sort((a, b) => {
@@ -37,20 +35,11 @@ const CategoryProducts = ({
       return b.today - a.today;
     }
 
-    if (sort === "up") {
-      return b.change.pct - a.change.pct;
-    }
-
-    if (sort === "down") {
-      return a.change.pct - b.change.pct;
-    }
-
     return 0;
   });
 
   return (
     <>
-      {/* Sort */}
       <section className="mt-4 flex h-[49px] items-center justify-end rounded-xl border border-gray-200 bg-white px-4 sm:px-5">
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-gray-500 sm:text-[11px]">
@@ -69,12 +58,10 @@ const CategoryProducts = ({
         </div>
       </section>
 
-      {/* Product Count */}
       <p className="mt-3 text-[10px] text-gray-500 sm:text-[11px]">
         মোট {sortedProducts.length}টি পণ্য দেখানো হচ্ছে
       </p>
 
-      {/* Products */}
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {sortedProducts.map((product) => (
           <ProductCard

@@ -7,7 +7,7 @@ const Bannar = () => {
   });
 
   return (
-    <div className="mx-auto w-full max-w-[1100px] px-3 sm:px-4">
+    <div className=" container mx-auto w-full max-w-6xl px-3 sm:px-4">
 
       <div className="
         flex min-h-[200px] w-full

@@ -62,7 +62,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   return (
-    <Link href={`/product/${product.slug}`}>
+    <Link href={`/product/${product.id}`}>
       <div
         className="
           rounded-xl

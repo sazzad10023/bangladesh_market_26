@@ -48,7 +48,7 @@ const CategoryNews = async ({
 
   return (
     <main className="min-h-screen bg-[#f3f7f3]">
-      <div className="mx-auto w-full max-w-[1100px] px-3 py-5 sm:px-4">
+      <div className="container mx-auto max-w-6xl px-3 py-5 sm:px-4">
 
         {/* Category Header */}
         <section className="rounded-xl border border-gray-200 bg-white px-4 py-4 sm:px-5">

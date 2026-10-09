@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import Marque from './Marque';
+import Image from "next/image";
+import Link from "next/link";
+import Marque from "./Marque";
 
 interface Navs {
   id: string;
@@ -18,8 +17,6 @@ const Navber = async () => {
   const data = await res.json();
   const navs: Navs[] = data;
 
-  console.log(navs);
-
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
@@ -28,28 +25,29 @@ const Navber = async () => {
     <header className="w-full">
 
       {/* Header */}
-      <div className="mx-auto flex min-h-[45px] max-w-[1100px] flex-col gap-3 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-0">
+      <div className="container mx-auto flex min-h-[45px] max-w-6xl flex-col gap-3 px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-0">
 
         {/* Logo + Brand */}
         <div className="flex items-center gap-2">
-          <Image
-            src="/logo-icon.png"
-            alt="বাজার দর"
-            width={30}
-            height={30}
-            priority
-            className="h-[30px] w-[30px] rounded-md"
-          />
 
-          <div className="flex flex-col leading-none">
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo-icon.png"
+              alt="বাজার দর"
+              width={30}
+              height={30}
+              priority
+              className="h-[30px] w-[30px] rounded-md"
+            />
+
             <span className="text-[20px] font-bold text-gray-900 sm:text-[22px] md:text-[25px]">
               বাজার দর
             </span>
+          </Link>
 
-            <span className="mt-[3px] text-[10px] text-gray-500 sm:text-[11px] md:text-[12px]">
-              {date}
-            </span>
-          </div>
+          <span className="mt-[3px] text-[10px] text-gray-500 sm:text-[11px] md:text-[12px]">
+            {date}
+          </span>
         </div>
 
         {/* Auth */}
@@ -65,21 +63,13 @@ const Navber = async () => {
       </div>
 
       {/* Categories */}
-      <div className="mx-auto max-w-[1100px] border-y border-gray-100">
-
+      <div className="mx-auto  max-w-6xl border-y border-gray-100">
         <div className="flex h-[45px] items-center overflow-x-auto px-3 sm:px-4">
           <div className="flex shrink-0 gap-4 sm:gap-5">
 
-            <Link
-              href="/"
-              className="flex shrink-0 items-center gap-1 text-[11px] text-gray-700 sm:text-[12px] md:text-[14px]"
-            >
-              <span>হোম</span>
-            </Link>
-
-            {navs.map((n, i) => (
+            {navs.map((n) => (
               <Link
-                key={i}
+                key={n.id}
                 href={`/category/${n.slug}`}
                 className="flex shrink-0 items-center gap-1 text-[11px] text-gray-700 sm:text-[12px] md:text-[14px]"
               >
