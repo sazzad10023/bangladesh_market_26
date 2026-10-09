@@ -3,14 +3,23 @@
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const UserInfo = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleSignout = async () => {
+const handleSignout = async () => {
+  try {
     await authClient.signOut();
-  };
+
+    toast.success("সফলভাবে সাইন আউট হয়েছে।");
+  } catch (error) {
+    console.log("SIGN OUT ERROR:", error);
+
+    toast.error("সাইন আউট করতে সমস্যা হয়েছে।");
+  }
+};
 
   return (
     <div className="shrink-0">

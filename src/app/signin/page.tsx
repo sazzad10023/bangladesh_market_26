@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import React from "react";
+import toast from "react-hot-toast";
 
 const page = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -14,81 +15,214 @@ const page = () => {
       password: string;
     };
 
-    console.log(user);
 
     const { data, error } = await authClient.signIn.email({
       ...user,
       callbackURL: "/",
     });
 
+
     if (data) {
-      console.log(data);
+      toast.success("সফলভাবে সাইন ইন হয়েছে।");
+      return;
     }
 
+    // Error
     if (error) {
-      console.log(error);
+      console.log("SIGN IN ERROR:", error);
+
+      toast.error("ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।");
+      return;
     }
   };
+
+
   const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-    });
+    try {
+      toast.loading("Google দিয়ে সাইন ইন করা হচ্ছে...", {
+        id: "google-login",
+      });
+
+      await authClient.signIn.social({
+        provider: "google",
+        // callbackURL: "/?login=success",
+      });
+    } catch (error) {
+      console.log("GOOGLE SIGN IN ERROR:", error);
+
+      toast.error("Google দিয়ে সাইন ইন করতে সমস্যা হয়েছে।", {
+        id: "google-login",
+      });
+    }
   };
-   const handleGithubSignIn = async () => {
- await authClient.signIn.social({
-      provider: "github",
-    });
+
+ 
+  const handleGithubSignIn = async () => {
+    try {
+      toast.loading("GitHub দিয়ে সাইন ইন করা হচ্ছে...", {
+        id: "github-login",
+      });
+
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/?login=success",
+      });
+    } catch (error) {
+      console.log("GITHUB SIGN IN ERROR:", error);
+
+      toast.error("GitHub দিয়ে সাইন ইন করতে সমস্যা হয়েছে।", {
+        id: "github-login",
+      });
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5">
-      <form onSubmit={onSubmit}>
-        <h2 className="text-2xl font-bold text-center">সাইন ইন</h2>
-
-        <p className="text-[14px]">
-          বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
-        </p>
-
-        <br />
-
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <label className="label">ইমেইল</label>
-
-          <input
-            type="email"
-            name="email"
-            className="input"
-            placeholder="Email"
-          />
-
-          <label className="label">পাসওয়ার্ড</label>
-
-          <input
-            type="password"
-            name="password"
-            className="input"
-            placeholder="কমপক্ষে ৮ অক্ষর"
-          />
-
-          <button
-            type="submit"
-            className="btn btn-neutral mt-4 bg-green-600"
-          >
+    <div className="min-h-[calc(100vh-45px)] bg-[#f3f8f4] px-4 py-8">
+      <div className="mx-auto flex w-full max-w-[400px] flex-col items-center">
+        {/* Heading */}
+        <div className="mb-6 text-center">
+          <h2 className="text-[26px] font-bold text-gray-900">
             সাইন ইন
-          </button>
-        </fieldset>
-      </form>
+          </h2>
 
-      <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
-  <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-  Login with Google
-</button>
+          <p className="mt-1 text-[13px] text-gray-500">
+            বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
+          </p>
+        </div>
 
+        
+        <div className="w-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <form onSubmit={onSubmit}>
+            <fieldset>
+              {/* Email */}
+              <label className="mb-2 block text-[13px] font-medium text-gray-800">
+                ইমেইল
+              </label>
 
-<button onClick={handleGithubSignIn} className="btn bg-black text-white border-black">
-  <svg aria-label="GitHub logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg>
-  Login with GitHub
-</button>
+              <input
+                type="email"
+                name="email"
+                required
+                className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
+                placeholder="you@example.com"
+              />
+
+              
+              <label className="mb-2 mt-4 block text-[13px] font-medium text-gray-800">
+                পাসওয়ার্ড
+              </label>
+
+              <input
+                type="password"
+                name="password"
+                required
+                className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
+                placeholder="কমপক্ষে ৮ অক্ষর"
+              />
+
+             
+              <button
+                type="submit"
+                className="mt-4 h-10 w-full rounded-lg bg-green-600 text-[13px] font-semibold text-white shadow-sm transition hover:bg-green-700"
+              >
+                সাইন ইন
+              </button>
+            </fieldset>
+          </form>
+
+          
+          <div className="my-5 flex items-center gap-3">
+            <div className="h-px flex-1 bg-gray-200" />
+
+            <span className="text-[11px] text-gray-500">
+              অথবা
+            </span>
+
+            <div className="h-px flex-1 bg-gray-200" />
+          </div>
+
+         
+          <div className="flex gap-2">
+         
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50"
+            >
+              <svg
+                aria-label="Google logo"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <g>
+                  <path
+                    d="m0 0H512V512H0"
+                    fill="#fff"
+                  />
+
+                  <path
+                    fill="#34a853"
+                    d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+                  />
+
+                  <path
+                    fill="#4285f4"
+                    d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+                  />
+
+                  <path
+                    fill="#fbbc02"
+                    d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+                  />
+
+                  <path
+                    fill="#ea4335"
+                    d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+                  />
+                </g>
+              </svg>
+
+              Google দিয়ে চালিয়ে যান
+            </button>
+
+            
+            <button
+              type="button"
+              onClick={handleGithubSignIn}
+              className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50"
+            >
+              <svg
+                aria-label="GitHub logo"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#18181b"
+                  d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10 10 0 0012,2Z"
+                />
+              </svg>
+
+              GitHub দিয়ে চালিয়ে যান
+            </button>
+          </div>
+
+          
+          <p className="mt-5 text-center text-[12px] text-gray-500">
+            অ্যাকাউন্ট নেই?{" "}
+
+            <a
+              href="/signup"
+              className="font-medium text-green-600 hover:text-green-700"
+            >
+              সাইন আপ করুন
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
