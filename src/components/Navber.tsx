@@ -29,14 +29,14 @@ const Navber = async () => {
         {/* Logo + Brand */}
         <div className="flex items-center gap-2">
           {/* Logo */}
-          <Link href="/">
+          <Link href="/" className="shrink-0">
             <Image
               src="/logo-icon.png"
               alt="বাজার দর"
-              width={48}
-              height={48}
+              width={40}
+              height={40}
               priority
-              className="h-12 w-12 rounded-xl"
+              className="h-11 w-11 rounded-xl bg-[#009447]  p-1.5"
             />
           </Link>
 
@@ -66,7 +66,7 @@ const Navber = async () => {
               <Link
                 key={n.id}
                 href={`/category/${n.slug}`}
-                className="flex shrink-0 items-center gap-1 text-[11px] text-gray-700 sm:text-[12px] md:text-[14px]"
+                className="flex shrink-0 items-center gap-1 rounded-md px-3 py-2 text-[11px] text-gray-700 transition-colors hover:bg-green-100 hover:text-[#009447] sm:text-[12px] md:text-[14px]"
               >
                 <span>{n.icon}</span>
                 <span>{n.nameBn}</span>

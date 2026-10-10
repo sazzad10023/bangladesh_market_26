@@ -28,7 +28,7 @@ const handleSignout = async () => {
           {/* Profile Image */}
           <Link href="/profile" className="shrink-0">
             <div className="avatar cursor-pointer">
-              <div className="w-10 rounded-full ring-2 ring-red-600 ring-offset-2 ring-offset-white">
+              <div className="w-10 rounded-full ring-2 ring-green-600 ring-offset-2 ring-offset-white">
                 <Image
                   src={user.image as string}
                   alt="User Avatar"
@@ -53,7 +53,7 @@ const handleSignout = async () => {
           {/* Sign Out */}
           <button
             onClick={handleSignout}
-            className="shrink-0 rounded-lg border border-red-100 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:border-red-200 hover:bg-red-600 hover:text-white"
+            className="shrink-0 rounded-lg border border-red-100 bg-green-500 px-3 py-1.5 text-xs font-semibold text-white-600 transition hover:border-red-200 hover:bg-red-600 hover:text-white"
           >
             Sign out
           </button>
