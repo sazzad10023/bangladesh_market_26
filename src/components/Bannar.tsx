@@ -83,22 +83,29 @@ const Bannar = () => {
         </div>
 
 
-        <div className="
-          relative hidden
-          h-[180px] w-[260px]
-          shrink-0
-          sm:block
-          md:h-[190px]
-          md:w-[300px]
-        ">
-          <Image
-            src="/bazar-hero.png"
-            alt="বাজার দর"
-            fill
-            priority
-            className="object-contain"
-          />
-        </div>
+
+           
+<div
+  className="
+    relative block
+    h-[120px] w-[120px]
+    shrink-0
+    min-[400px]:h-[140px] min-[400px]:w-[140px]
+    sm:h-[160px] sm:w-[180px]
+    md:h-[190px] md:w-[300px]
+  "
+>
+  <Image
+    src="/bazar-hero.png"
+    alt="বাজার দর"
+    fill
+    priority
+    sizes="(max-width: 399px) 120px, (max-width: 639px) 140px, (max-width: 767px) 180px, 300px"
+    className="object-contain"
+  />
+</div>
+
+
 
       </div>
     </div>
