@@ -37,7 +37,7 @@ const Navber = async () => {
               width={40}
               height={40}
               priority
-              className="h-11 w-11 rounded-xl bg-[#009447] p-1.5"
+              className="h-11 w-11 rounded-xl bg-green-700 p-1.5"
             />
           </Link>
 

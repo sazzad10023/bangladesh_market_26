@@ -1,10 +1,11 @@
+
 "use client";
 
 import { authClient } from "@/lib/auth-client";
 import React from "react";
 import toast from "react-hot-toast";
 
-const page = () => {
+const SigninPage = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -15,12 +16,10 @@ const page = () => {
       password: string;
     };
 
-
     const { data, error } = await authClient.signIn.email({
       ...user,
       callbackURL: "/",
     });
-
 
     if (data) {
       toast.success("সফলভাবে সাইন ইন হয়েছে।");
@@ -35,7 +34,6 @@ const page = () => {
       return;
     }
   };
-
 
   const handleGoogleSignIn = async () => {
     try {
@@ -56,7 +54,6 @@ const page = () => {
     }
   };
 
- 
   const handleGithubSignIn = async () => {
     try {
       toast.loading("GitHub দিয়ে সাইন ইন করা হচ্ছে...", {
@@ -77,24 +74,21 @@ const page = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-45px)] bg-[#f3f8f4] px-4 py-8">
+    <div className="min-h-[calc(100vh-45px)] bg-[#f3f8f4] px-3 py-6 sm:px-6 sm:py-8">
       <div className="mx-auto flex w-full max-w-[400px] flex-col items-center">
-        
-        <div className="mb-6 text-center">
-          <h2 className="text-[26px] font-bold text-gray-900">
+        <div className="mb-5 w-full text-center sm:mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 sm:text-[26px]">
             সাইন ইন
           </h2>
 
-          <p className="mt-1 text-[13px] text-gray-500">
+          <p className="mt-1 text-[12px] leading-5 text-gray-500 sm:text-[13px]">
             বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
           </p>
         </div>
 
-        
-        <div className="w-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="w-full min-w-0 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:rounded-2xl sm:p-5">
           <form onSubmit={onSubmit}>
-            <fieldset>
-              
+            <fieldset className="min-w-0">
               <label className="mb-2 block text-[13px] font-medium text-gray-800">
                 ইমেইল
               </label>
@@ -103,11 +97,10 @@ const page = () => {
                 type="email"
                 name="email"
                 required
-                className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
+                className="h-10 w-full min-w-0 rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
                 placeholder="you@example.com"
               />
 
-              
               <label className="mb-2 mt-4 block text-[13px] font-medium text-gray-800">
                 পাসওয়ার্ড
               </label>
@@ -116,11 +109,10 @@ const page = () => {
                 type="password"
                 name="password"
                 required
-                className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
+                className="h-10 w-full min-w-0 rounded-lg border border-gray-200 bg-white px-3 text-[13px] text-gray-800 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-100"
                 placeholder="কমপক্ষে ৮ অক্ষর"
               />
 
-             
               <button
                 type="submit"
                 className="mt-4 h-10 w-full rounded-lg bg-green-600 text-[13px] font-semibold text-white shadow-sm transition hover:bg-green-700"
@@ -130,24 +122,21 @@ const page = () => {
             </fieldset>
           </form>
 
-          
           <div className="my-5 flex items-center gap-3">
             <div className="h-px flex-1 bg-gray-200" />
 
-            <span className="text-[11px] text-gray-500">
+            <span className="shrink-0 text-[11px] text-gray-500">
               অথবা
             </span>
 
             <div className="h-px flex-1 bg-gray-200" />
           </div>
 
-         
-          <div className="flex gap-2">
-         
+          <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2">
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50"
+              className="flex h-10 w-full min-w-0 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50 sm:text-xs"
             >
               <svg
                 aria-label="Google logo"
@@ -155,6 +144,7 @@ const page = () => {
                 height="16"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
+                className="shrink-0"
               >
                 <g>
                   <path
@@ -184,14 +174,13 @@ const page = () => {
                 </g>
               </svg>
 
-              Google দিয়ে চালিয়ে যান
+              <span className="min-w-0">Google দিয়ে চালিয়ে যান</span>
             </button>
 
-            
             <button
               type="button"
               onClick={handleGithubSignIn}
-              className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50"
+              className="flex h-10 w-full min-w-0 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 text-[11px] font-medium text-gray-700 transition hover:bg-gray-50 sm:text-xs"
             >
               <svg
                 aria-label="GitHub logo"
@@ -199,6 +188,7 @@ const page = () => {
                 height="16"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
+                className="shrink-0"
               >
                 <path
                   fill="#18181b"
@@ -206,11 +196,10 @@ const page = () => {
                 />
               </svg>
 
-              GitHub দিয়ে চালিয়ে যান
+              <span className="min-w-0">GitHub দিয়ে চালিয়ে যান</span>
             </button>
           </div>
 
-          
           <p className="mt-5 text-center text-[12px] text-gray-500">
             অ্যাকাউন্ট নেই?{" "}
 
@@ -227,4 +216,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SigninPage;

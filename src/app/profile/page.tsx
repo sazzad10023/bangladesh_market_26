@@ -1,3 +1,4 @@
+
 "use client";
 
 import { authClient } from "@/lib/auth-client";
@@ -11,55 +12,54 @@ const ProfilePage = () => {
   const user = session?.user;
 
   const handleSignout = async () => {
-  try {
-    await authClient.signOut();
+    try {
+      await authClient.signOut();
 
-    toast.success("সফলভাবে সাইন আউট হয়েছে।");
-  } catch (error) {
-    console.log("SIGN OUT ERROR:", error);
+      toast.success("সফলভাবে সাইন আউট হয়েছে।");
+    } catch (error) {
+      console.log("SIGN OUT ERROR:", error);
 
-    toast.error("সাইন আউট করতে সমস্যা হয়েছে।");
-    return;
-  }
-
-  redirect("/signin");
-};
-
- const handleUpdateProfile = async (
-  e: React.SubmitEvent<HTMLFormElement>
-) => {
-  e.preventDefault();
-
-  const formData = new FormData(e.target as HTMLFormElement);
-
-  const newUserData = Object.fromEntries(formData.entries()) as {
-    name: string;
-  };
-
-  try {
-    const { data, error } = await authClient.updateUser({
-      ...newUserData,
-    });
-
-    if (error) {
-      toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
+      toast.error("সাইন আউট করতে সমস্যা হয়েছে।");
       return;
     }
 
-    if (data) {
-      toast.success("প্রোফাইল সফলভাবে আপডেট হয়েছে।");
+    redirect("/signin");
+  };
+
+  const handleUpdateProfile = async (
+    e: React.SubmitEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const newUserData = Object.fromEntries(formData.entries()) as {
+      name: string;
+    };
+
+    try {
+      const { data, error } = await authClient.updateUser({
+        ...newUserData,
+      });
+
+      if (error) {
+        toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
+        return;
+      }
+
+      if (data) {
+        toast.success("প্রোফাইল সফলভাবে আপডেট হয়েছে।");
+      }
+    } catch (error) {
+      console.log("UPDATE PROFILE ERROR:", error);
+      toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
     }
-  } catch (error) {
-    console.log("UPDATE PROFILE ERROR:", error);
-    toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
-  }
-};
+  };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-    
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+    <div className="mx-auto w-full max-w-4xl px-3 py-5 sm:px-5 sm:py-8">
+      <div className="mb-5 sm:mb-6">
+        <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
           আমার প্রোফাইল
         </h1>
 
@@ -68,11 +68,9 @@ const ProfilePage = () => {
         </p>
       </div>
 
-      <div className="flex flex-nowrap items-center justify-between rounded-2xl border border-gray-200 bg-white px-7 py-6">
-      
-        <div className="flex min-w-0 items-center gap-5">
-       
-          <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-2xl bg-gray-100">
+      <div className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-4 sm:rounded-2xl sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-6 md:px-7">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-5">
+          <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-gray-100 sm:h-[72px] sm:w-[72px] sm:rounded-2xl">
             <Image
               alt="User Avatar"
               src={user?.image as string}
@@ -82,35 +80,32 @@ const ProfilePage = () => {
             />
           </div>
 
-
-          <div className="min-w-0">
-            <h2 className="truncate text-xl font-semibold text-gray-900">
+          <div className="min-w-0 flex-1">
+            <h2 className="truncate text-base font-semibold text-gray-900 sm:text-xl">
               {user?.name}
             </h2>
 
-            <p className="mt-1 truncate text-sm text-gray-500">
+            <p className="mt-1 break-all text-xs text-gray-500 sm:truncate sm:text-sm">
               {user?.email}
             </p>
           </div>
         </div>
 
-   
         <button
           onClick={handleSignout}
-          className="ml-6 shrink-0 rounded-lg border border-red-200 px-5 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-600 hover:text-white"
+          className="w-full shrink-0 rounded-lg border border-red-200 px-4 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-600 hover:text-white sm:ml-4 sm:w-auto sm:px-5"
         >
           সাইন আউট
         </button>
       </div>
 
-    
-      <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-7">
+      <div className="mt-4 rounded-xl border border-gray-200 bg-white p-4 sm:mt-6 sm:rounded-2xl sm:p-6 md:p-7">
         <h2 className="text-lg font-semibold text-gray-900">
           তথ্য
         </h2>
 
-        <form onSubmit={handleUpdateProfile} className="mt-6">
-          <fieldset>
+        <form onSubmit={handleUpdateProfile} className="mt-5 sm:mt-6">
+          <fieldset className="min-w-0">
             {/* Name */}
             <label className="mb-2 block text-sm font-medium text-gray-700">
               নাম
@@ -120,14 +115,13 @@ const ProfilePage = () => {
               name="name"
               type="text"
               defaultValue={user?.name || ""}
-              className="h-12 w-full rounded-lg border border-gray-300 px-3 text-sm text-gray-900 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-600"
+              className="h-11 w-full min-w-0 rounded-lg border border-gray-300 px-3 text-sm text-gray-900 outline-none transition focus:border-green-600 focus:ring-1 focus:ring-green-600 sm:h-12"
               placeholder="Name"
             />
 
-         
             <button
               type="submit"
-              className="mt-5 h-12 w-full rounded-lg bg-green-600 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700"
+              className="mt-4 h-11 w-full rounded-lg bg-green-600 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700 sm:mt-5 sm:h-12"
             >
               আপডেট
             </button>
