@@ -23,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Navber></Navber>
-        {children}
+         <main className="flex-1">{children}</main>
         <Footer></Footer>
          <Toaster position="top-right" />
         </body>

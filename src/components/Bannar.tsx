@@ -22,10 +22,10 @@ const Bannar = () => {
         md:px-10
       ">
 
-        {/* Left Content */}
+
         <div className="z-10 flex max-w-[650px] flex-col items-start">
 
-          {/* Date */}
+
           <span className="
             rounded-full
             bg-green-50
@@ -38,7 +38,7 @@ const Bannar = () => {
             {date}
           </span>
 
-          {/* Title */}
+
           <h2 className="
             mt-2
             text-[25px] font-bold leading-tight
@@ -49,7 +49,6 @@ const Bannar = () => {
             আজকের বাজারের দাম এক নজরে
           </h2>
 
-          {/* Description */}
           <p className="
             mt-3
             max-w-[620px]
@@ -62,7 +61,6 @@ const Bannar = () => {
             বিস্তারিত, গড়, সর্বনিম্ন- <br />সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
-          {/* Button */}
           <button className="
             mt-4
             rounded-md
@@ -84,7 +82,7 @@ const Bannar = () => {
 
         </div>
 
-        {/* Right Image */}
+
         <div className="
           relative hidden
           h-[180px] w-[260px]

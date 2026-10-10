@@ -79,7 +79,7 @@ const page = () => {
   return (
     <div className="min-h-[calc(100vh-45px)] bg-[#f3f8f4] px-4 py-8">
       <div className="mx-auto flex w-full max-w-[400px] flex-col items-center">
-        {/* Heading */}
+        
         <div className="mb-6 text-center">
           <h2 className="text-[26px] font-bold text-gray-900">
             সাইন ইন
@@ -94,7 +94,7 @@ const page = () => {
         <div className="w-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <form onSubmit={onSubmit}>
             <fieldset>
-              {/* Email */}
+              
               <label className="mb-2 block text-[13px] font-medium text-gray-800">
                 ইমেইল
               </label>

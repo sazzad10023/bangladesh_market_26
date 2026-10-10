@@ -89,7 +89,7 @@ const SignInpage = () => {
     return (
         <div className="min-h-[calc(100vh-45px)] bg-[#f3f8f4] px-4 py-10">
             <div className="mx-auto flex w-full max-w-[400px] flex-col items-center">
-                {/* Heading */}
+             
                 <div className="mb-6 text-center">
                     <h2 className="text-[26px] font-bold text-gray-900">
                         অ্যাকাউন্ট তৈরি করুন
@@ -104,7 +104,7 @@ const SignInpage = () => {
                 <div className="w-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
                     <form onSubmit={onSubmit}>
                         <fieldset>
-                            {/* Name */}
+                       
                             <label className="mb-2 block text-[13px] font-medium text-gray-800">
                                 নাম
                             </label>
@@ -127,7 +127,7 @@ const SignInpage = () => {
                                 placeholder="you@example.com"
                             />
 
-                            {/* Password */}
+                           
                             <label className="mb-2 mt-4 block text-[13px] font-medium text-gray-800">
                                 পাসওয়ার্ড
                             </label>
@@ -139,7 +139,7 @@ const SignInpage = () => {
                                 placeholder="কমপক্ষে ৮ অক্ষর"
                             />
 
-                            {/* Confirm Password */}
+                          
                             <label className="mb-2 mt-4 block text-[13px] font-medium text-gray-800">
                                 পাসওয়ার্ড নিশ্চিত করুন
                             </label>

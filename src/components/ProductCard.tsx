@@ -77,10 +77,10 @@ const ProductCard = ({ product }: { product: Product }) => {
         "
       >
 
-        {/* Product */}
+        
         <div className="flex items-center gap-3">
 
-          {/* Image / Emoji */}
+     
           <div
             className="
               flex
@@ -97,7 +97,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.image}
           </div>
 
-          {/* Name */}
+  
           <div className="min-w-0">
 
             <h2 className="truncate text-[14px] font-semibold text-gray-900">
@@ -112,10 +112,10 @@ const ProductCard = ({ product }: { product: Product }) => {
 
         </div>
 
-        {/* Bottom */}
+       
         <div className="mt-4 flex items-end justify-between">
 
-          {/* Price */}
+          
           <div>
 
             <p className="text-[9px] text-gray-500">
@@ -132,7 +132,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
           </div>
 
-          {/* Change */}
+  
           <span
             className={`
               rounded-full
