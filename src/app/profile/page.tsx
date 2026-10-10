@@ -25,21 +25,35 @@ const ProfilePage = () => {
   redirect("/signin");
 };
 
-  const handleUpdateProfile = async (
-    e: React.SubmitEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
+ const handleUpdateProfile = async (
+  e: React.SubmitEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
+  const formData = new FormData(e.target as HTMLFormElement);
 
-    const newUserData = Object.fromEntries(formData.entries()) as {
-      name: string;
-    };
+  const newUserData = Object.fromEntries(formData.entries()) as {
+    name: string;
+  };
 
-    await authClient.updateUser({
+  try {
+    const { data, error } = await authClient.updateUser({
       ...newUserData,
     });
-  };
+
+    if (error) {
+      toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
+      return;
+    }
+
+    if (data) {
+      toast.success("প্রোফাইল সফলভাবে আপডেট হয়েছে।");
+    }
+  } catch (error) {
+    console.log("UPDATE PROFILE ERROR:", error);
+    toast.error("প্রোফাইল আপডেট করতে সমস্যা হয়েছে।");
+  }
+};
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">

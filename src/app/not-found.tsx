@@ -18,11 +18,10 @@ const NotFound = () => {
 
                 {/* Message */}
                 <h2 className="text-2xl sm:text-3xl font-bold text-red-900 mb-3">
-                    Page Not Found
+                   পৃষ্ঠাটি খুঁজে পাওয়া যায়নি!
                 </h2>
                 <p className="text-red-700/80 mb-8 leading-relaxed">
-                    Oops! The page youre looking for doesnt exist or has been moved.
-                    Lets get you back on track.
+                   দুঃখিত, আপনি যে পৃষ্ঠাটি খুঁজছেন সেটি খুঁজে পাওয়া যায়নি অথবা পৃষ্ঠাটি সরিয়ে ফেলা হয়েছে।
                 </p>
 
                 {/* Button */}
@@ -37,7 +36,7 @@ const NotFound = () => {
                                active:translate-y-0
                                transition-all duration-300 ease-out"
                 >
-                    ← Back to Home
+                    ← হোম পেজে ফিরে যান
                 </Link>
             </div>
         </div>
