@@ -8,6 +8,7 @@ const db = client.db("makert_bangla");
 export const auth = betterAuth({
      emailAndPassword: { 
     enabled: true, 
+    autoSignIn:false,
   }, 
   socialProviders: {
         google: { 
